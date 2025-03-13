@@ -1,6 +1,6 @@
 import cron from "node-cron";
 import Event from "../models/event-model.js";
-import { sendNotification } from "./notification-service.js";
+// import { sendNotification } from "./notification-service.js";
 
 // Initialize the reminder system
 export const initializeReminderSystem = () => {
@@ -30,19 +30,19 @@ const checkReminders = async () => {
     .populate("category", "name");
 
   // Process each event
-  for (const event of events) {
-    for (const reminder of event.reminders) {
-      // Check if this reminder needs to be sent
-      if (!reminder.sent && reminder.time <= fiveMinutesFromNow) {
-        // Send notification
-        await sendNotification(event.user, event, reminder);
+  //   for (const event of events) {
+  //     for (const reminder of event.reminders) {
+  //       // Check if this reminder needs to be sent
+  //       if (!reminder.sent && reminder.time <= fiveMinutesFromNow) {
+  //         // Send notification
+  //         await sendNotification(event.user, event, reminder);
 
-        // Mark reminder as sent
-        reminder.sent = true;
-      }
-    }
+  //         // Mark reminder as sent
+  //         reminder.sent = true;
+  //       }
+  //     }
 
-    // Save the updated event
-    await event.save();
-  }
+  //     // Save the updated event
+  //     await event.save();
+  //   }
 };
